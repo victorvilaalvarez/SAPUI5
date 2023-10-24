@@ -1,6 +1,46 @@
-<mvc:View controllerName="C23C249.invoices.controller.App"
-xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-<Button id="_IDGenButton1" text= "{i18n>showHelloButtonText}" press=".onShowHello" ></Button>
-<Input id="_IDGenInput1" value="{/recipient/name}" valueLiveUpdate="true" width="60%" ></Input>
-</mvc:View>
+<mvc:View
+    xmlns:appfinder="sap.ushell.ui.appfinder"
+    controllerName="C23C249.invoices.controller.App"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+>
+    <Shell id="_IDGenShell1">
+        <App id="_IDGenApp1">
+            <pages>
+                <Page
+                    id="_IDGenPage1"
+                    title="{i18n>appTitle}"
+                >
+                    <content>
+                        <Panel
+                            id="_IDGenPanel1"
+                            headerText="{i18n>helloPanel}"
+                            class="sapUiResponsiveMargin"
+                        >
+                            <content>
+                                <Button
+                                    id="_IDGenButton1"
+                                    text="{i18n>showHelloButtonText}"
+                                    press=".onShowHello"
+                                    class="sapUiSmallMarginEnd"
+                                />
+                                <Input
+                                    id="_IDGenInput1"
+                                    valueLiveUpdate="true"
+                                    width="60%"
+                                    value = "{/recipient/name}"
 
+                                />
+                                <Text id="_IDGenText1"
+                                    text="Hello {/recipient/name}"
+                                    class="sapUiSmallMargin boldElements"
+                                />
+                            </content>
+                        </Panel>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
