@@ -8,6 +8,7 @@ modules:
   requires:
   - name: C23C249_html_repo_runtime
   - name: uaa_C23C249
+  - name: dest_C23C249
   parameters:
     disk-quota: 256M
     memory: 256M
@@ -18,6 +19,65 @@ modules:
   - name: C23C249_html_repo_host
     parameters:
       content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - project1.zip
+      name: project1
+      target-path: resources/
+    - artifacts:
+      - project2.zip
+      name: project2
+      target-path: resources/
+    - artifacts:
+      - namespaceproject1.zip
+      name: namespaceproject1
+      target-path: resources/
+    - artifacts:
+      - namespproject23333.zip
+      name: namespproject23333
+      target-path: resources/
+- name: project1
+  type: html5
+  path: project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: project2
+  type: html5
+  path: project2
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: namespaceproject1
+  type: html5
+  path: project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: namespproject23333
+  type: html5
+  path: project23333
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: C23C249_html_repo_runtime
   type: org.cloudfoundry.managed-service
@@ -36,3 +96,21 @@ resources:
   parameters:
     service: html5-apps-repo
     service-plan: app-host
+- name: dest_C23C249
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+    service: destination
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo

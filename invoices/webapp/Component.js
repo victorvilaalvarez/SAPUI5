@@ -1,14 +1,15 @@
 //@ts-nocheck
 sap.ui.define(["sap/ui/core/UIComponent",
     "C23C249/invoices/model/Models",
-    "sap/ui/model/resource/ResourceModel"],
+    "sap/ui/model/resource/ResourceModel",
+    "./controller/helloDialog"],
 
     /**
      * 
      * @param {typeof sap.ui.core.UIComponent} UIComponent
      * 
      */
-    function (UIComponent, Models, ResourceModel) {
+    function (UIComponent, Models, ResourceModel,helloDialog) {
 
         return UIComponent.extend("C23C249.invoices.Component", {
 
@@ -32,6 +33,24 @@ sap.ui.define(["sap/ui/core/UIComponent",
                 this.setModel(Models.createRecipient());
                 var i18nModel = new ResourceModel({ bundleName: "C23C249.invoices.i18n.i18n" });
                 this.setModel(i18nModel, "i18n");
+
+                this._helloDialog = new helloDialog(this.getRootControl());
+            },
+
+            exit: function () {
+
+                this._helloDialog.destroy();
+                delete this._helloDialog;
+
+
+
+            },
+
+            openHelloDialog: function () {
+
+                this._helloDialog.open();
+
             }
+
         })
     });

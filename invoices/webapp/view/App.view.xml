@@ -3,6 +3,7 @@
     controllerName="C23C249.invoices.controller.App"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
     displayBlock="true"
 >
     <Shell id="_IDGenShell1">
@@ -12,32 +13,24 @@
                     id="_IDGenPage1"
                     title="{i18n>appTitle}"
                 >
+                <headerContent>
+                					<Button
+				icon="sap-icon://action"
+				id="_IDGenButton3"
+				press=".onShowDialogHeader"
+				class="sapUiSmallMarginEnd"
+			/>
+                
+                </headerContent>
                     <content>
-                        <Panel
-                            id="_IDGenPanel1"
-                            headerText="{i18n>helloPanel}"
-                            class="sapUiResponsiveMargin"
-                        >
-                            <content>
-                                <Button
-                                    id="_IDGenButton1"
-                                    text="{i18n>showHelloButtonText}"
-                                    press=".onShowHello"
-                                    class="sapUiSmallMarginEnd"
-                                />
-                                <Input
-                                    id="_IDGenInput1"
-                                    valueLiveUpdate="true"
-                                    width="60%"
-                                    value = "{/recipient/name}"
-
-                                />
-                                <Text id="_IDGenText1"
-                                    text="Hello {/recipient/name}"
-                                    class="sapUiSmallMargin boldElements"
-                                />
-                            </content>
-                        </Panel>
+                        <mvc:XMLView
+                            id="IDGenXMLView1"
+                            viewName="C23C249/invoices/view/HelloPanel"
+                        />
+                              <mvc:XMLView
+                            id="IDGenXMLView2"
+                            viewName="C23C249/invoices/view/InvoicesList"
+                        />
                     </content>
                 </Page>
             </pages>

@@ -1,0 +1,50 @@
+<mvc:View
+	controllerName="C23C249.invoices.controller.InvoicesList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<List
+		id="_IDGenList1"
+		headerText="{i18n>invoiceListTitle}"
+		class="sapUIResponsiveMargin"
+		width="auto"
+		items="{ path: 'northwind>/Invoices',
+                    sorter : { path : 'ShipperName',
+                               group : true}
+                    
+                    }"
+	>
+		<headerToolbar>
+			<Toolbar>
+			<Title text = "{i18n>invoiceListTitle}"></Title>
+            <ToolbarSpacer ></ToolbarSpacer>
+            	<SearchField width="50%" search=".onFilterInvoices"/>
+			</Toolbar>
+		</headerToolbar>
+		<items>
+			<ObjectListItem
+				id="_IDGenObjectListItem1"
+				title="{northwind>Quantity} x {northwind>ProductName}"
+				number="{
+					parts: [{
+						path: 'northwind>ExtendedPrice'
+					}, {
+						path: 'cur>/eur'
+					}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false,
+						groupingSeparator: ',',
+						decimals: 2,
+						decimalSeparator: '.',
+						style: 'short',
+						roundingMode: 'TOWARDS_ZERO'
+					}
+				}"
+				numberUnit="{cur>/eur}"
+				numberState="{= ${northwind>ExtendedPrice} > 50 ? 'Success' : 'Error'}"
+			>
+			</ObjectListItem>
+		</items>
+	</List>
+</mvc:View>
